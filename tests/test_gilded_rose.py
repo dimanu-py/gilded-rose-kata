@@ -1,6 +1,6 @@
 
-from gilded_rose.gilded_rose import Item, GildedRose
-from gilded_rose.items import NormalItem, AgedBrie, BackstagePasses
+from gilded_rose.gilded_rose import GildedRose
+from gilded_rose.items import NormalItem, AgedBrie, BackstagePasses, Sulfuras
 
 BACKSTAGE_PASSES = "Backstage passes"
 SULFURAS = "Sulfuras, Hand of Ragnaros"
@@ -75,7 +75,7 @@ class TestGildedRose:
         assert items[0].quality == 12
 
     def test_legendary_item_quality_never_changes(self):
-        items = [Item(SULFURAS, 10, 80)]
+        items = [Sulfuras(SULFURAS, 10, 80)]
         gilded_rose = GildedRose(items)
 
         gilded_rose.update_quality()
@@ -83,7 +83,7 @@ class TestGildedRose:
         assert items[0].quality == 80
 
     def test_legendary_item_sell_in_never_changes(self):
-        items = [Item(SULFURAS, 10, 80)]
+        items = [Sulfuras(SULFURAS, 10, 80)]
         gilded_rose = GildedRose(items)
 
         gilded_rose.update_quality()
