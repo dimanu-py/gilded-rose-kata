@@ -1,7 +1,7 @@
+import pytest
 from approvaltests import verify
 
 from gilded_rose_approvals.gilded_rose import Item, GildedRose
-
 
 
 def item_printer(item: Item) -> str:
@@ -10,11 +10,21 @@ def item_printer(item: Item) -> str:
 
 class TestGildedRoseApprovals:
 
-    def test_update_quality(self, intellij_diff_reporter):
-        item = [Item("foo", 0, 0)]
+    @pytest.mark.parametrize(
+        "name, sell_in, quality",
+        [("foo", 0, 0)],
+    )
+    def test_update_quality(self, name, sell_in, quality, intellij_diff_reporter):
+        item_as_string = self.do_update_quality(name, quality, sell_in)
+
+        verify(item_as_string, reporter=intellij_diff_reporter)
+
+    def do_update_quality(self, name: str, quality: int, sell_in: int) -> str:
+        item = [Item(name, sell_in, quality)]
         gilded_rose = GildedRose(item)
 
         gilded_rose.update_quality()
 
         item_as_string = item_printer(item[0])
-        verify(item_as_string, reporter=intellij_diff_reporter)
+
+        return item_as_string
