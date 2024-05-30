@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 pytest = "==7.4.3"
+pytest-approvaltests = "*"
+pytest-mock = "*"
+pytest-coverage = "*"
 
 [dev-packages]
 
