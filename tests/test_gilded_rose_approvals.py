@@ -1,7 +1,7 @@
 from approvaltests import verify_all_combinations
 
 from gilded_rose_approvals.gilded_rose import GildedRose
-from gilded_rose_approvals.items import Item, CommonItem
+from gilded_rose_approvals.items import Item, CommonItem, AgedBrieItem
 
 
 def item_printer(item: Item) -> str:
@@ -34,4 +34,6 @@ class TestGildedRoseApprovals:
     def select_item(self, name: str, sell_in: int, quality: int) -> Item:
         if name == "Common Item":
             return CommonItem(name, sell_in, quality)
+        elif name == "Aged Brie":
+            return AgedBrieItem(name, sell_in, quality)
         return Item(name, sell_in, quality)
